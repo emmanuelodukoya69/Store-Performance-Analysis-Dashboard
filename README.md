@@ -5,6 +5,7 @@ End-to-end business intelligence project that connects live retail data from a *
 > **Current scope:** January 2025 data (12 stores, 4 states, 2 sales channels, 6 product categories). The data model is deliberately built to receive new monthly extracts without rework - see below. <img width="680" height="476" alt="Data Model" src="https://github.com/user-attachments/assets/e4f16708-b8ff-460f-8940-38d64e53fd1a" />
 
 Group each Measures in their respective family
+
 <img width="469" height="550" alt="Measures" src="https://github.com/user-attachments/assets/b0726bf0-2535-4b60-86b2-844361267872" />
 
 ---
