@@ -2,7 +2,7 @@
 
 End-to-end business intelligence project that connects live retail data from a **PostgreSQL** database to **Power BI**, transforms and models it for scale, and delivers an executive-ready sales dashboard with a full DAX measure library.
 
-> 📌 **Current scope:** January 2025 data (12 stores, 4 states, 2 sales channels, 6 product categories). The data model is deliberately built to receive new monthly extracts without rework — see <img width="818" height="462" alt="image 1" src="https://github.com/user-attachments/assets/ed615035-4748-4c83-b59c-4a8dca6462bd" />
+> **Current scope:** January 2025 data (12 stores, 4 states, 2 sales channels, 6 product categories). The data model is deliberately built to receive new monthly extracts without rework — see <img width="818" height="462" alt="image 1" src="https://github.com/user-attachments/assets/ed615035-4748-4c83-b59c-4a8dca6462bd" />
  below.
 
 
@@ -54,10 +54,10 @@ End-to-end business intelligence project that connects live retail data from a *
 
 ### 2. Data Transformation & Cleaning (Power Query)
 Cleaning and shaping was done entirely in Power Query before the data reached the model layer, so the model itself stays fast and simple:
-- **Type enforcement** — explicitly set data types on every column (Date, whole number, decimal, text) since PostgreSQL/import defaults aren't always what Power BI infers.
-- **Null handling** — identified and addressed rows with missing `Discounts` / `Returns` values (2 of 360 rows) rather than letting them silently break aggregations; documented as a known data-quality flag rather than guessed at.
-- **Column standardization** — trimmed and cleaned text fields (`StoreName`, `City`, `Region`, `Category`) to avoid duplicate categories from whitespace/casing inconsistencies.
-- **Derived columns removed from the fact table** — calculated fields like `DayOfWeek` were re-derived from the Date dimension instead of trusting the source column, so the model has a single source of truth for date logic (see below).
+- **Type enforcement** : explicitly set data types on every column (Date, whole number, decimal, text) since PostgreSQL/import defaults aren't always what Power BI infers.
+- **Null handling** : identified and addressed rows with missing `Discounts` / `Returns` values (2 of 360 rows) rather than letting them silently break aggregations; documented as a known data-quality flag rather than guessed at.
+- **Column standardization** : trimmed and cleaned text fields (`StoreName`, `City`, `Region`, `Category`) to avoid duplicate categories from whitespace/casing inconsistencies.
+- **Derived columns removed from the fact table** : calculated fields like `DayOfWeek` were re-derived from the Date dimension instead of trusting the source column, so the model has a single source of truth for date logic (see below).
 - **Query folding preserved** where possible, so filtering/grouping steps push back down to PostgreSQL instead of running in Power BI's engine — keeping refreshes fast as more months are appended.
 
 ### 3. Data Modeling
@@ -113,7 +113,7 @@ Every measure uses `DIVIDE()` instead of the `/` operator to handle blank/zero d
 
 
 ---
-# 📊 Store Performance — Dashboard Insights
+# Store Performance — Dashboard Insights
 
 A deeper dive into what my 30-day store performance analysis is telling me — where the money's coming from, what's actually profitable, and where the opportunities and risks are hiding.
 
@@ -157,11 +157,11 @@ This backs up the idea that it's more about **visibility than a problem with the
 When I look at performance by category, it tells quite a different story.
 
 - **Grocery** stands out with the **highest net sales** at around **$1 million** but has a **lower profit margin** compared to other categories.
-- On the flip side, **Health** may have lower sales volume but boasts the **highest profit margin** — nearly hitting **40%**. It might not bring in as much cash overall, but it's certainly more efficient.
+- On the flip side, **Health** may have lower sales volume but boasts the **highest profit margin**, nearly hitting **40%**. It might not bring in as much cash overall, but it's certainly more efficient.
 - Categories like **Home Goods, Apparel, Electronics, and Sports** fall somewhere in between regarding both sales and margins, with some fluctuations here and there.
 - Interestingly enough, **Grocery also experiences the highest return volume**, while returns drop off in categories that sell less overall.
 
-So what does this mean? It directly supports the point — **just because something sells well doesn't mean it earns well too**. Grocery attracts customers, but **Health and Apparel tend to be much more profitable per dollar spent**.
+So what does this mean? It directly supports the point, **just because something sells well doesn't mean it earns well too**. Grocery attracts customers, but **Health and Apparel tend to be much more profitable per dollar spent**.
 
 ---
 
@@ -193,9 +193,9 @@ Now let me get into specifics about store performance:
 - **Riverwalk Goods** comes next with **$76K**
 - **Front Range Mart** adds another solid performance at **$75K**
 
-Interestingly enough though: **Enchanted Circle Store significantly lags behind** all others — it only pulls in about **a third of what my top store makes in profit** — definitely something I plan to examine further regarding potential issues like location or staffing challenges.
+Interestingly enough though: **Enchanted Circle Store significantly lags behind** all others, it only pulls in about **a third of what my top store makes in profit**, definitely something I plan to examine further regarding potential issues like location or staffing challenges.
 
-Another thing worth noting is that store rankings for sales and profits don't always align perfectly; for example, **Lone Star Central ranks fourth in terms of sales but second in profits** — which serves as a good reminder that **high revenue doesn't automatically mean high profitability**.
+Another thing worth noting is that store rankings for sales and profits don't always align perfectly; for example, **Lone Star Central ranks fourth in terms of sales but second in profits**, which serves as a good reminder that **high revenue doesn't automatically mean high profitability**.
 
 ---
 
@@ -214,20 +214,18 @@ So here's what I'd suggest: when planning staffing or inventory needs, I should 
 
 To sum everything up from my analysis of these dashboards:
 
-1. **Revenue is concentrated** primarily within **one region (Southwest)**, **one state (New Mexico)**, and largely from **in-store channels** — which may work efficiently now but poses risks long-term.
-2. **What sells best (Grocery) doesn't necessarily earn best (Health/Apparel)** — so managing margins is as crucial as tracking volume.
-3. **My online presence appears underutilized rather than ineffective** — a real opportunity for growth moving forward.
+1. **Revenue is concentrated** primarily within **one region (Southwest)**, **one state (New Mexico)**, and largely from **in-store channels**, which may work efficiently now but poses risks long-term.
+2. **What sells best (Grocery) doesn't necessarily earn best (Health/Apparel)**, so managing margins is as crucial as tracking volume.
+3. **My online presence appears underutilized rather than ineffective**, a real opportunity for growth moving forward.
 
 ---
-*Source: 30-day store performance analysis across regions, states, categories, and channels.*
-
 
 
 ## Data Quality Notes
 
 Transparency matters as much as polish in a real BI project:
 - 2 of 360 store-day rows were missing a `Discounts` or `Returns` value. These were treated as $0 in all aggregations rather than dropped or estimated, and flagged for follow-up with the source system rather than silently corrected.
-- The dataset currently covers a single month, so month-over-month and year-over-year DAX measures are built and functional but not yet meaningful — they will activate automatically as more monthly extracts are loaded.
+- The dataset currently covers a single month, so month-over-month and year-over-year DAX measures are built and functional but not yet meaningful, they will activate automatically as more monthly extracts are loaded.
 
 ---
 
