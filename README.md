@@ -2,7 +2,8 @@
 
 End-to-end business intelligence project that connects live retail data from a **PostgreSQL** database to **Power BI**, transforms and models it for scale, and delivers an executive-ready sales dashboard with a full DAX measure library.
 
-> 📌 **Current scope:** January 2025 data (12 stores, 4 states, 2 sales channels, 6 product categories). The data model is deliberately built to receive new monthly extracts without rework — see [Data Modeling](#3-data-modeling) below.
+> 📌 **Current scope:** January 2025 data (12 stores, 4 states, 2 sales channels, 6 product categories). The data model is deliberately built to receive new monthly extracts without rework — see <img width="818" height="462" alt="image 1" src="https://github.com/user-attachments/assets/ed615035-4748-4c83-b59c-4a8dca6462bd" />
+ below.
 
 
 ---
@@ -34,11 +35,13 @@ End-to-end business intelligence project that connects live retail data from a *
 
 **Page 1 — Sales Performance Overview:** daily trend, weekday vs. weekend, top/bottom stores, profit by store.
 
-![Dashboard overview page](./images/dashboard_overview.png)
+<img width="819" height="467" alt="image 2" src="https://github.com/user-attachments/assets/eedf9b03-15fb-4e02-b122-3c41085f06cc" />
+
 
 **Page 2 — Regional & Category Deep Dive:** region and state performance, channel split, category profitability, store-type volume — with slicers for state and region.
 
-![Dashboard regional view](./images/dashboard_regional_view.png)
+<img width="818" height="462" alt="image 1" src="https://github.com/user-attachments/assets/d6e86241-ddfc-4add-b42e-3ab0f854b7b8" />
+
 
 ---
 
